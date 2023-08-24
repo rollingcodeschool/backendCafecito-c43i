@@ -1,6 +1,8 @@
 import express from 'express';
-console.log('esta es una prueba dfsd2')
 // 1- configuraciones iniciales
+const app = express();
+// crear una variable
+app.set('port', process.env.PORT || 4000);
 
 // 2- middlewares
 
