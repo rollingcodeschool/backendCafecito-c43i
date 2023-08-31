@@ -3,6 +3,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import 'dotenv/config'; //permite procesar variables de entorno
 import productoRouter from './src/routes/productos.routes.js';
+import usuarioRouter from './src/routes/usuario.routes.js';
 
 // 1- configuraciones iniciales
 const app = express();
@@ -21,5 +22,6 @@ app.use(morgan('dev')); //nos da mas informacion en la terminal
 // 3- crear las rutas
 // http://localhost:4000/api/producto
 app.use('/api',productoRouter)
+app.use('/api',usuarioRouter)
 
 // tarea: crear una ruta y controlador para los usuarios
