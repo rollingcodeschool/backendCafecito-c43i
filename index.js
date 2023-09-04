@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import 'dotenv/config'; //permite procesar variables de entorno
 import productoRouter from './src/routes/productos.routes.js';
 import usuarioRouter from './src/routes/usuario.routes.js';
+import './src/database/database.js';
 
 // 1- configuraciones iniciales
 const app = express();
