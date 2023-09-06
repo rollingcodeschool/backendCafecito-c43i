@@ -50,3 +50,17 @@ export const editarProducto = async (req, res) =>{
     }
 }
 
+export const borrarProducto = async (req, res) =>{
+    try{
+        await Producto.findByIdAndDelete(req.params.id);
+        res.status(200).json({
+            mensaje: "El producto fue eliminado correctamente"
+        })   
+    }catch(error){
+        console.log(error);
+        res.status(400).json({
+            mensaje: "No se puedo eliminar el producto"
+        })
+    }
+}
+
