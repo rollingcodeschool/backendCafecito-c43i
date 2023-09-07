@@ -1,5 +1,5 @@
 import Usuario from "../models/usuario.js";
-import bcrypt from 'bcrypt';
+import bcrypt from "bcrypt";
 
 //verificar si existe el mail
 //verificar si el usuario que encontre tiene la misma contraseña que recibi en body
@@ -19,12 +19,18 @@ export const login = async (req, res) => {
       });
     }
     //desencriptar y comparar password
+    const passwordValido = bcrypt.compareSync(password, usuario.password);
+    if (!passwordValido) {
+      return res
+        .status(400)
+        .json({ mensaje: "Correo o password invalido - password" });
+    }
 
     //responder que el usuario es correcto
     res.status(200).json({
       mensaje: "El usuario existe",
       uid: usuario._id,
-      nombre: usuario.usuario,
+      nombre: usuario.nombreUsuario,
     });
   } catch (error) {
     console.log(error);
