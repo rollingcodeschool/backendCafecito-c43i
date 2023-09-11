@@ -5,6 +5,7 @@ import 'dotenv/config'; //permite procesar variables de entorno
 import productoRouter from './src/routes/productos.routes.js';
 import usuarioRouter from './src/routes/usuario.routes.js';
 import './src/database/database.js';
+import path from 'path';
 
 // 1- configuraciones iniciales
 const app = express();
@@ -19,7 +20,11 @@ app.use(cors()); //permite conexiones remotas
 app.use(express.json());//permite interpretar datos en formato json
 app.use(express.urlencoded({extended:true})); // ayuda a interpretar datos del body del request
 app.use(morgan('dev')); //nos da mas informacion en la terminal
-
+// agregar un archivo estatico
+// console.log(path.join(__dirname ,'/public'));
+console.log(path.join('D:/RollingCode/22-23/c43i/05-backendCafecito' ,'/public'));
+app.use(express.static(path.join('D:/RollingCode/22-23/c43i/05-backendCafecito' ,'/public')))
+// app.use(express.static(new URL(import.meta.url).pathname + 'public'));
 // 3- crear las rutas
 // http://localhost:4000/api/producto
 app.use('/api',productoRouter)
