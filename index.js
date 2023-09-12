@@ -10,8 +10,6 @@ import { fileURLToPath } from 'url';
 
 // 1- configuraciones iniciales
 const app = express();
-console.log(fileURLToPath(import.meta.url));
-
 const _filename = fileURLToPath(import.meta.url);
 const _dirname = path.dirname(_filename);
 // crear una variable
@@ -26,8 +24,6 @@ app.use(express.json());//permite interpretar datos en formato json
 app.use(express.urlencoded({extended:true})); // ayuda a interpretar datos del body del request
 app.use(morgan('dev')); //nos da mas informacion en la terminal
 // agregar un archivo estatico
-// console.log(path.join(__dirname ,'/public'));
-// app.use(express.static(path.join('D:/RollingCode/22-23/c43i/05-backendCafecito' ,'/public')))
 app.use(express.static(path.join(_dirname, '/public')));
 
 // 3- crear las rutas
