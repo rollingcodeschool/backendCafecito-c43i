@@ -10,8 +10,7 @@ import { fileURLToPath } from 'url';
 
 // 1- configuraciones iniciales
 const app = express();
-const _filename = fileURLToPath(import.meta.url);
-const _dirname = path.dirname(_filename);
+
 // crear una variable
 app.set('port', process.env.PORT || 4000);
 app.listen(app.get('port'), ()=>{
@@ -24,7 +23,11 @@ app.use(express.json());//permite interpretar datos en formato json
 app.use(express.urlencoded({extended:true})); // ayuda a interpretar datos del body del request
 app.use(morgan('dev')); //nos da mas informacion en la terminal
 // agregar un archivo estatico
-app.use(express.static(path.join(_dirname, '/public')));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+console.log(__dirname)
+app.use(express.static(path.join(__dirname, "/public")));
+
 
 // 3- crear las rutas
 // http://localhost:4000/api/producto
