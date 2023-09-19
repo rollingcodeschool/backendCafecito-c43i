@@ -18,14 +18,6 @@ export const crearProducto = async (req, res) => {
   try {
     // ir a la bd y pedir los productos
     // trabajar los datos de la validación
-    const errors = validationResult(req);
-    //errors.isEmpty() true: si esta todo ok, false: si hay errores
-    if(!errors.isEmpty()){
-      return res.status(400).json({
-        errores: errors.array()
-      })
-    }
-
     console.log(req.body);
     const productoNuevo = new Producto(req.body);
     //guardar el productoNuevo en la base de datos
