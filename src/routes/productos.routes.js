@@ -8,13 +8,14 @@ import {
 } from "../controllers/productos.controllers.js";
 import { check } from "express-validator";
 import validacionesProducto from "../helpers/validacionProducto.js";
+import validarJWT from "../helpers/token-verify.js";
 
 const router = Router();
 
 router
   .route("/producto")
   .get(listarProductos)
-  .post(validacionesProducto, crearProducto);
+  .post([validarJWT, validacionesProducto], crearProducto);
 router
   .route("/producto/:id")
   .put(validacionesProducto, editarProducto)
