@@ -74,3 +74,33 @@ export const obtenerProducto = async (req, res) => {
     });
   }
 };
+
+// export const borrarProducto = async (req, res) => {
+//   try {
+//     const producto = await Producto.findById(req.params.id);
+
+//     if (!producto) {
+//       return res.status(404).json({
+//         mensaje: "El producto no existe",
+//       });
+//     }
+
+//     await Producto.findByIdAndDelete(req.params.id);
+    
+//     res.status(200).json({
+//       mensaje: "El producto fue eliminado correctamente",
+//     });
+//   } catch (error) {
+//     console.error(error);
+
+//     if (error instanceof mongoose.CastError) {
+//       return res.status(400).json({
+//         mensaje: "ID de producto inválido",
+//       });
+//     }
+
+//     res.status(500).json({
+//       mensaje: "Ocurrió un error al intentar eliminar el producto",
+//     });
+//   }
+// };

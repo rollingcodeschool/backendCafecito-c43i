@@ -1,4 +1,5 @@
 import mongoose, {Schema} from "mongoose";
+// en Mongoose, el "modelo" representa una colección de documentos en la base de datos, mientras que el "esquema" describe la estructura de los datos que se almacenan en esos documentos. Mongoose añade una capa de abstracción sobre MongoDB, permitiendo a los desarrolladores definir esquemas para estructurar los datos de manera más rigurosa y utilizar modelos para interactuar con la base de datos de forma más sencilla y consistente.
 
 const productoSchema = new Schema({
     nombreProducto:{
@@ -16,11 +17,19 @@ const productoSchema = new Schema({
     },
     imagen:{
         type: String,
-        required: true
+        required: true,
+        validate: {
+            validator: function(v) {
+                // Validar URL de imagen
+                return /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png)/.test(v);
+            },
+            message: props => `${props.value} no es una URL de imagen válida!`
+        }
     },
     categoria:{
         type: String,
-        required: true
+        required: true,
+        enum: ['Infusiones','Batidos', 'Dulce', 'Salado']
     },
     descripcion:{
         type: String,
