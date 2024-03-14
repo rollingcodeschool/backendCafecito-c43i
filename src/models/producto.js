@@ -19,11 +19,12 @@ const productoSchema = new Schema({
         type: String,
         required: true,
         validate: {
-            validator: function(v) {
+            validator: function(valor) {
                 // Validar URL de imagen
-                return /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png)/.test(v);
+                return /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png)/.test(valor);
             },
-            message: props => `${props.value} no es una URL de imagen válida!`
+            // message: props => `${props.value} no es una URL de imagen válida!`
+            message: valor => `${valor} no es una URL de imagen válida!`
         }
     },
     categoria:{

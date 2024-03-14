@@ -36,16 +36,23 @@ export const editarProducto = async (req, res) => {
     // ir a la bd y pedir los productos
     // aqui los datos deberian estar validados
     //extraer el parametro id de la ruta
+   // Verificar si el producto existe antes de intentar editarlo
+   const productoExistente = await Producto.findById(productId);
+   if (!productoExistente) {
+    return res.status(404).json({ mensaje: "El producto que intentas editar no existe" });
+  }
 
     await Producto.findByIdAndUpdate(req.params.id, req.body);
     res.status(200).json({
       mensaje: "El producto fue modificado correctamente",
     });
   } catch (error) {
-    console.log(error);
-    res.status(400).json({
-      mensaje: "No se puede editar el producto",
-    });
+    // console.log(error);
+    // res.status(400).json({
+    //   mensaje: "No se puede editar el producto",
+    // });
+    console.error("Error al editar el producto:", error.message);
+    res.status(500).json({ mensaje: "Ocurrió un error al editar el producto" });
   }
 };
 
@@ -66,6 +73,10 @@ export const obtenerProducto = async (req, res) => {
   try {
     const productoBuscado = await Producto.findById(req.params.id);
     // pueden agregar un if para trabajar el caso de tener un NULL
+    if (!productoBuscado) {
+      return res.status(404).json({ mensaje: "Producto no encontrado" });
+    }
+
     res.status(200).json(productoBuscado);
   } catch (error) {
     console.log(error);
@@ -75,32 +86,31 @@ export const obtenerProducto = async (req, res) => {
   }
 };
 
-// export const borrarProducto = async (req, res) => {
-//   try {
-//     const producto = await Producto.findById(req.params.id);
+export const borrarProducto2 = async (req, res) => {
+  try {
+    const producto = await Producto.findById(req.params.id);
 
-//     if (!producto) {
-//       return res.status(404).json({
-//         mensaje: "El producto no existe",
-//       });
-//     }
+    if (!producto) {
+      return res.status(404).json({
+        mensaje: "El producto no existe",
+      });
+    }
 
-//     await Producto.findByIdAndDelete(req.params.id);
+    await Producto.findByIdAndDelete(req.params.id);
     
-//     res.status(200).json({
-//       mensaje: "El producto fue eliminado correctamente",
-//     });
-//   } catch (error) {
-//     console.error(error);
+    res.status(200).json({
+      mensaje: "El producto fue eliminado correctamente",
+    });
+  } catch (error) {
+    // console.error(error);
 
-//     if (error instanceof mongoose.CastError) {
-//       return res.status(400).json({
-//         mensaje: "ID de producto inválido",
-//       });
-//     }
-
-//     res.status(500).json({
-//       mensaje: "Ocurrió un error al intentar eliminar el producto",
-//     });
-//   }
-// };
+    // if (error instanceof mongoose.CastError) {
+    //   return res.status(400).json({
+    //     mensaje: "ID de producto inválido",
+    //   });
+    // }
+     // Manejo de errores específicos
+     console.error("Error al eliminar el producto:", error.message);
+     res.status(500).json({ mensaje: "Ocurrió un error al eliminar el producto" });
+  }
+};
