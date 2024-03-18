@@ -37,7 +37,7 @@ export const editarProducto = async (req, res) => {
     // aqui los datos deberian estar validados
     //extraer el parametro id de la ruta
    // Verificar si el producto existe antes de intentar editarlo
-   const productoExistente = await Producto.findById(productId);
+   const productoExistente = await Producto.findById(req.params.id);
    if (!productoExistente) {
     return res.status(404).json({ mensaje: "El producto que intentas editar no existe" });
   }

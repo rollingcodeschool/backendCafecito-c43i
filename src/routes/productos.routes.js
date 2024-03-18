@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { borrarProducto, crearProducto, editarProducto, listarProductos, obtenerProducto } from "../controllers/productos.controllers.js";
+import { borrarProducto, borrarProducto2, crearProducto, editarProducto, listarProductos, obtenerProducto } from "../controllers/productos.controllers.js";
 
 const router = Router();
 
-router.route('/producto').get(listarProductos).post(crearProducto);
-router.route('/producto/:id').put(editarProducto).delete(borrarProducto).get(obtenerProducto);
+router.route('/productos').get(listarProductos).post(crearProducto);
+router.route('/productos/:id').put(editarProducto).delete(borrarProducto2).get(obtenerProducto);
 // tarea agregar el modelo, ruta y controlador para agregar y listar usuarios
 export default router;
